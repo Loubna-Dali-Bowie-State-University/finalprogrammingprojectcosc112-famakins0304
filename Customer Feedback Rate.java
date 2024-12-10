@@ -1,3 +1,4 @@
+//import java utility scanner
 import java.util.Scanner;
 
 public class Main {
