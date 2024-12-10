@@ -1,0 +1,73 @@
+//import Java Utility Scanner
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        // Declare and initialize variables
+        int count = 0;
+        String item;
+        String date;
+        String time;
+        float cost;
+        float totalSpending = 0;
+        float dailyBudget = 120f;
+        float excessSpending;
+
+        // Prompt user to enter date
+        System.out.print("Enter a date (DD-MM-YYYY): ");
+        date = scanner.nextLine();
+
+        while (count < 5 && totalSpending < dailyBudget) {
+            System.out.print("Enter an item (or type 'done' to stop): ");
+            item = scanner.nextLine();
+
+            // Stop the loop if the user types "done"
+            if (item.equalsIgnoreCase("done")) {
+                break;
+            }
+
+            // Prompt user to enter time
+            System.out.print("Enter time (HH:mm): ");
+            time = scanner.nextLine();
+
+            // Prompt user to enter cost
+            System.out.print("Enter cost: $");
+            if (scanner.hasNextFloat()) {
+                cost = scanner.nextFloat();
+                scanner.nextLine(); // Consume the leftover newline
+            } else {
+                System.out.println("Invalid cost. Please enter a valid number.");
+                scanner.nextLine(); // Consume invalid input
+                continue; // Retry current iteration
+            }
+
+            totalSpending += cost;
+
+            if (totalSpending > dailyBudget) {
+                excessSpending = totalSpending - dailyBudget;
+                System.out.println("Your daily budget is: $" + dailyBudget);
+                System.out.println("-------------------------------");
+                System.out.println("Your total spending: $" + totalSpending);
+                System.out.println("-------------------------------");
+                System.out.println("You have exceeded your daily budget by: $" + excessSpending + "!");
+                break;
+            } else {
+                count++;
+            }
+        }
+
+        // Display total spending if within budget
+        if (totalSpending <= dailyBudget) {
+            System.out.println("Your daily budget is: $" + dailyBudget);
+            System.out.println("-------------------------------");
+            System.out.println("Your total spending is: $" + totalSpending);
+            System.out.println("-------------------------------");
+            System.out.println("Good job! You stayed within your daily budget.");
+        }
+
+        scanner.close(); // Close the scanner
+    }
+}
